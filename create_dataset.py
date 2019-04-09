@@ -8,31 +8,26 @@ import torch
 mean = torch.tensor([0.5, 0.5, 0.5], dtype=torch.float32)
 std = torch.tensor([0.5, 0.5, 0.5], dtype=torch.float32)
 normalize = transforms.Normalize(mean.tolist(), std.tolist())
-unnormalize = transforms.Normalize((-mean / std).tolist(), (1.0 / std).tolist())
-transformations = transforms.Compose([transforms.Resize(96),
-                                      transforms.ToTensor(),
-                                      normalize])
+resize_crop = transforms.Compose([transforms.Resize(96),
+                                  transforms.CenterCrop(96)])
+tensor_normalize = transforms.Compose([transforms.ToTensor(),
+                                       normalize])
 
-class JellyfishDataset(transformations):
+img_tensors = torch.tensor([])
+i = 0
+for img_path in glob.glob('./dataset/*.jpg'):
+    print(img_path, i)
+    i += 1
+    img = resize_crop(Image.open(img_path))
+    initial_img = tensor_normalize(img)
+    rotated_img = tensor_normalize(img.rotate(180))
+    v_flipped_img = tensor_normalize(img.transpose(Image.FLIP_TOP_BOTTOM))
+    h_flipped_img = tensor_normalize(img.transpose(Image.FLIP_LEFT_RIGHT))
+    stacked_imgs = torch.stack([initial_img, rotated_img, v_flipped_img, h_flipped_img])
+    img_tensors = torch.cat([img_tensors, stacked_imgs])
 
-    def __init__(self, dataset_path):
-        self.datset_path = dataset_path
-        self.image_tensors = self.images_to_tensors()
+print(img_tensors.size())
+img_np_arr = img_tensors.numpy()
+print(img_np_arr.shape)
 
-    def images_to_tensors(self):
-        img_tensors = torch.tensor([])
-        for img_path in glob.glob(self.datset_path):
-            img = Image.open(img_path)
-            initial_img = transformations(img)
-            rotated_img = transformations(img.rotate(180))
-            v_flipped_img = transformations(img.transpose(Image.FLIP_TOP_BOTTOM))
-            h_flipped_img = transformations(img.transpose(Image.FLIP_LEFT_RIGHT))
-            stacked_imgs = torch.stack([initial_img, rotated_img, v_flipped_img, h_flipped_img])
-            img_tensors = torch.cat([img_tensors, stacked_imgs])
-        return img_tensors
-        
-    def __len__(self):
-        return len(self.image_tensors)
-
-    def __getitem__(self, idx):
-        return self.image_tensors[idx]
+np.savez('dataset.npz', train_arr=img_np_arr)
