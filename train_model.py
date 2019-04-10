@@ -70,7 +70,7 @@ class Generator(nn.Module):
         out = self.l1(z)
         out = out.view(out.shape[0], 128, self.init_size, self.init_size)
         img = self.conv_blocks(out)
-        print('gen', img.size())
+        # print('gen', img.size())
         return img
 
 class Discriminator(nn.Module):
@@ -98,7 +98,7 @@ class Discriminator(nn.Module):
                                         nn.Sigmoid())
 
     def forward(self, img):
-        print('disc', img.size())
+        # print('disc', img.size())
         out = self.model(img)
         out = out.view(out.shape[0], -1)
         validity = self.adv_layer(out)
@@ -158,7 +158,7 @@ for epoch in range(opt.n_epochs):
 
         # Generate a batch of images
         gen_imgs = generator(z)
-        print(real_imgs.size(), gen_imgs.size())
+        # print(real_imgs.size(), gen_imgs.size())
 
         # Loss measures generator's ability to fool the discriminator
         g_loss = adversarial_loss(discriminator(gen_imgs), valid)
