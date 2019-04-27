@@ -9,8 +9,8 @@ mean = torch.tensor([0.5, 0.5, 0.5], dtype=torch.float32)
 std = torch.tensor([0.5, 0.5, 0.5], dtype=torch.float32)
 normalize = transforms.Normalize(mean.tolist(), std.tolist())
 unnormalize = transforms.Normalize((-mean / std).tolist(), (1.0 / std).tolist())
-resize_crop = transforms.Compose([transforms.Resize(96),
-                                  transforms.CenterCrop(96)])
+resize_crop = transforms.Compose([transforms.Resize(32),
+                                  transforms.CenterCrop(32)])
 tensor_normalize = transforms.Compose([transforms.ToTensor(),
                                        normalize])
 unnormalize_pil = transforms.Compose([unnormalize,
@@ -18,12 +18,14 @@ unnormalize_pil = transforms.Compose([unnormalize,
 i = 0
 for img_path in glob.glob("./check/*.jpg"):
     img = Image.open(img_path)
+    # img = img.convert('1')
     img = resize_crop(img)
-    img = tensor_normalize(img)
-    img = unnormalize_pil(img)
-
-    # img = Image.fromarray(arr)
     img.save(str(i) + "tmp.jpg")
+    # img = tensor_normalize(img)
+    # img = unnormalize_pil(img)
+
+    # # img = Image.fromarray(arr)
+    # img.save(str(i) + "tmp.jpg")
     i += 1
     # img = transformations(img)
     # img = img.transpose(Image.FLIP_TOP_BOTTOM)

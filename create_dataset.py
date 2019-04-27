@@ -8,8 +8,8 @@ import torch
 mean = torch.tensor([0.5, 0.5, 0.5], dtype=torch.float32)
 std = torch.tensor([0.5, 0.5, 0.5], dtype=torch.float32)
 normalize = transforms.Normalize(mean.tolist(), std.tolist())
-resize_crop = transforms.Compose([transforms.Resize(96),
-                                  transforms.CenterCrop(96)])
+resize_crop = transforms.Compose([transforms.Resize(32),
+                                  transforms.CenterCrop(32)])
 tensor_normalize = transforms.Compose([transforms.ToTensor(),
                                        normalize])
 
@@ -30,4 +30,4 @@ print(img_tensors.size())
 img_np_arr = img_tensors.numpy()
 print(img_np_arr.shape)
 
-np.savez('dataset.npz', train_arr=img_np_arr)
+np.savez('final_dataset.npz', train_arr=img_np_arr)
