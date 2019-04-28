@@ -12,3 +12,4 @@ parser.add_argument('--img_size', type=int, default=32)
 parser.add_argument('--channels', type=int, default=3)
 opt = parser.parse_args()
 print(opt)
+

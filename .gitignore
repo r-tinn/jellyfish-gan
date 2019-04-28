@@ -1,11 +1,4 @@
 dataset/*
-test/*
 __pycache__
-check/*
-images_old/*
-check_dataset.py
-dataset_subset.npz
-old_create_dataset.py
-images/*
 dataset.npz
-final_dataset.npz
+.vscode
