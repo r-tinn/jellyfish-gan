@@ -20,10 +20,7 @@ My quick and simple idea for creating a dataset was to sample the frames of a vi
 
 Examples of the screenshots sampled from the video:
 
-<img src="./readme_images/scene_1.jpg" width="250" caption="a">
-<img src="./readme_images/scene_2.jpg" width="250">
-<img src="./readme_images/scene_3.jpg" width="250">
-<img src="./readme_images/scene_4.jpg" width="250">
+<img src="./readme_images/scene_1.jpg" width="250"> <img src="./readme_images/scene_2.jpg" width="250"> <img src="./readme_images/scene_3.jpg" width="250"> <img src="./readme_images/scene_4.jpg" width="250">
 
 
 - The dataset was augmented by applying rotation and reflections to each image to produce ~ 40,000 datapoints.
