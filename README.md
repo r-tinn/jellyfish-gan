@@ -37,9 +37,7 @@ The normalisation of the mean and standard deviation for a single image:
 
 ## Results
 
-<img src="./readme_images/real_jfish.png" width="100">
-<img src="./readme_images/initial_samples.png" width="100">
-<img src="./readme_images/gen_jfish.png" width="100">
+<img src="./readme_images/real_jfish.png" width="100"> <img src="./readme_images/initial_samples.png" width="100"> <img src="./readme_images/gen_jfish.png" width="100">
 
 (left: ground truth images, centre: images produced by the untrained generator, right: images synthesised after training)
 
