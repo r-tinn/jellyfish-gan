@@ -1,6 +1,8 @@
 ## Description
 
-This project seeks to replicate the model from [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434) (2016) and validate its results.
+This project seeks to replicate the model from [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/1511.06434) (2016) and validate its results on a novel dataset.
+
+Credit to [eriklindernoren](https://github.com/eriklindernoren/PyTorch-GAN) for implementing DC-GAN in PyTorch.
 
 There are several different reasons for my motivation to undertake this project:
 - Firstly, I was keen to implement an academic paper that I enjoyed reading for myself.
